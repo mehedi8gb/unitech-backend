@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone')->nullable();
+            $table->decimal('commission_rate', 5, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -2,47 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Actions\StoreProjectAction;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Resources\ProjectCollection;
+use App\Models\Project;
+use Illuminate\Http\JsonResponse;
 
 class ProjectController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Store a new project with associated data.
      */
-    public function index()
+    public function store(StoreProjectRequest $request, StoreProjectAction $action): JsonResponse
     {
-        //
+        $validatedData = $request->validated();
+
+        // Call the action to store data
+        $project = $action->execute($validatedData);
+
+        return response()->json(['data' => $project], 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * List all projects with minimal data.
      */
-    public function store(Request $request)
+    public function index(): JsonResponse
     {
-        //
+        $projects = Project::with([
+            'floors.units',
+            'floors.units.bookingStatus',
+            'floors.units.images',
+            'images'])->get();
+        return response()->json(new ProjectCollection($projects));
     }
 
     /**
-     * Display the specified resource.
+     * Show detailed information for a specific project.
      */
-    public function show(string $id)
+    public function show(int $id): JsonResponse
     {
-        //
-    }
+        $project = Project::with('floors.units.bookingStatus', 'floors.units.agentSales.agent', 'images')
+            ->findOrFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json(['data' => $project]);
     }
 }
+

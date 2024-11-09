@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('agent_sales', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('agent_id')->constrained()->onDelete('cascade');
+            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
+            $table->decimal('commission_earned', 12, 2)->nullable();
             $table->timestamps();
         });
     }

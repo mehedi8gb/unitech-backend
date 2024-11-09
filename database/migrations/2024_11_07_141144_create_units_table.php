@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('floor_id')->constrained()->onDelete('cascade');
+            $table->string('unit_number');
+            $table->decimal('size', 8, 2)->nullable();
+            $table->decimal('price', 12, 2);
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('units');
     }
 };
