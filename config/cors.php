@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000', 'http://192.168.0.6:3000'],
+    'allowed_origins' => ['http://localhost:3000', 'http://192.168.0.6:3000','https://www.unitechholdingsltd.com'],
 
     'allowed_origins_patterns' => [],
 
