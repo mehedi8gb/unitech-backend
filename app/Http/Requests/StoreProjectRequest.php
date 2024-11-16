@@ -23,31 +23,16 @@ class StoreProjectRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'location' => 'required|string|max:255',
+            'address' => 'required|string|max:255', 
+            // Project images (optional) 
+            'image' => 'string',  
+            'status' => 'required',
+            'details' => 'array',
+            'plans' => 'array',
+            'features' => 'array',
+            'images' => 'array',
+            'iframeSrc' => 'string'
 
-            // Project images (optional)
-            'images' => 'nullable|array',
-            'images.*' => 'string|url',
-
-            // Floors (required array of floors)
-            'floors' => 'required|array',
-            'floors.*.floor_number' => 'required|integer|min:1',
-            'floors.*.description' => 'nullable|string',
-
-            // Units for each floor
-            'floors.*.units' => 'required|array',
-            'floors.*.units.*.unit_number' => 'required|string|max:50',
-            'floors.*.units.*.size' => 'required|integer|min:1',
-            'floors.*.units.*.price' => 'required|numeric|min:0',
-            'floors.*.units.*.status' => 'required|string|in:Available,Booked,Reserved,Sold,Pending,Cancelled,Under Offer',
-
-            // Booking status for each unit
-            'floors.*.units.*.booking_status.status_name' => 'required|in:Available,Booked,Reserved,Sold,Pending,Cancelled,Under Offer',
-            'floors.*.units.*.booking_status.color_code' => 'nullable|string|max:7|regex:/^#[A-Fa-f0-9]{6}$/',
-
-            // Unit images (optional)
-            'floors.*.units.*.images' => 'nullable|array',
-            'floors.*.units.*.images.*' => 'string|url',
         ];
     }
 

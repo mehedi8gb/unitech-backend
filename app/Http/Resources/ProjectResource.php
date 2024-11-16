@@ -15,11 +15,8 @@ class ProjectResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'floors' => FloorResource::collection($this->whenLoaded('floors')),
-            'images' => ImageResource::collection(($this->whenLoaded('images'))),
+             
+            ...json_decode($this->data,true), "id" => $this->id
         ];
     }
 }

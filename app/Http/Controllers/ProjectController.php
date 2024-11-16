@@ -15,12 +15,11 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request, StoreProjectAction $action): JsonResponse
     {
-        $validatedData = $request->validated();
-
+        $validatedData = $request->validated(); 
         // Call the action to store data
         $project = $action->execute($validatedData);
 
-        return response()->json(['data' => $project], 201);
+        return response()->json(['data' => ['id'=>$project->id, ...json_decode( $project->data, true)]   ], 201);
     }
 
     /**
@@ -28,11 +27,12 @@ class ProjectController extends Controller
      */
     public function index(): JsonResponse
     {
-        $projects = Project::with([
-            'floors.units',
-            'floors.units.bookingStatus',
-            'floors.units.images',
-            'images'])->get();
+        // $projects = Project::with([
+        //     'floors.units',
+        //     'floors.units.bookingStatus',
+        //     'floors.units.images',
+        //     'images'])->get();
+        $projects = Project::all();
         return response()->json(new ProjectCollection($projects));
     }
 
@@ -45,6 +45,13 @@ class ProjectController extends Controller
             ->findOrFail($id);
 
         return response()->json(['data' => $project]);
+    }
+    public function destroy(int $id): JsonResponse
+    {
+        $project = Project::where('id',$id);
+        $project->delete();
+
+        return response()->json(['message' => 'Project deleted!']);
     }
 }
 
