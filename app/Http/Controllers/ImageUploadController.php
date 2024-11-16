@@ -11,7 +11,7 @@ class ImageUploadController extends Controller
     {
         // Validate the incoming request for the file
         $validated = $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Only allow images
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:102400', // Only allow images
         ]);
 
         // Store the image in the 'public' disk
