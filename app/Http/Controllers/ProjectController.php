@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\StoreProjectAction;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Resources\ProjectCollection;
+use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 
@@ -41,14 +42,13 @@ class ProjectController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $project = Project::with('floors.units.bookingStatus', 'floors.units.agentSales.agent', 'images')
-            ->findOrFail($id);
+        $project = Project::findOrFail($id);
 
-        return response()->json(['data' => $project]);
+        return response()->json( new ProjectResource($project));
     }
     public function destroy(int $id): JsonResponse
     {
-        $project = Project::where('id',$id);
+        $project = Project::findOrFail($id);
         $project->delete();
 
         return response()->json(['message' => 'Project deleted!']);
