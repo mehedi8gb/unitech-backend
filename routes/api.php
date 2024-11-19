@@ -23,4 +23,5 @@ Route::prefix('project')->group(function () {
     Route::get('/', [ProjectController::class, 'index']);         // List all projects
     Route::get('/{id}', [ProjectController::class, 'show']);      // Show a specific project with full details
     Route::delete('/{id}', [ProjectController::class, 'destroy']);      // Show a specific project with full details
+    Route::put('/{id}', [ProjectController::class, 'update']);      // Show a specific project with full details
 });

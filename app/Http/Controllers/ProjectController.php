@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\StoreProjectAction;
+use App\Actions\UpdateProjectAction;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectCollection;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
@@ -21,6 +23,14 @@ class ProjectController extends Controller
         $project = $action->execute($validatedData);
 
         return response()->json(['data' => ['id'=>$project->id, ...json_decode( $project->data, true)]   ], 201);
+    }
+    public function update(UpdateProjectRequest $request, UpdateProjectAction $action, $id): JsonResponse
+    {
+        $validatedData = $request->validated(); 
+        // Call the action to store data
+        $project = $action->execute($validatedData);
+         
+        return response()->json(['data' => ['id'=>$project->id, ...json_decode( $project->data, true)]   ], 200);
     }
 
     /**
