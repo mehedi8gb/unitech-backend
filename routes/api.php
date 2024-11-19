@@ -18,7 +18,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('project')->group(function () {
+Route::prefix('projects')->group(function () {
     Route::post('/create', [ProjectController::class, 'store']);        // Create a new project with full details
     Route::get('/', [ProjectController::class, 'index']);         // List all projects
     Route::get('/{id}', [ProjectController::class, 'show']);      // Show a specific project with full details
