@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return response()->json('this is UniTech API');
 });
+Route::post('/upload-image', [ImageUploadController::class, 'uploadImage']);
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
