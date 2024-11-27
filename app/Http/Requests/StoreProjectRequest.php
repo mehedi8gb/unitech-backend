@@ -23,9 +23,9 @@ class StoreProjectRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'address' => 'required|string|max:255', 
-            // Project images (optional) 
-            'image' => 'string',  
+            'address' => 'required|string|max:255',
+            // Project images (optional)
+            'image' => 'array',
             'status' => 'required',
             'details' => 'array',
             'plans' => 'array',
