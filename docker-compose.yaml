@@ -36,14 +36,6 @@ services:
       interval: 10s
       start_period: 30s
 
-  htmltoimage:
-    image: "monkeyphysics/html-to-image"
-    ports:
-      - "3033:3033"
-    restart: unless-stopped
-    networks:
-      - laravel-production
-
   php-fpm:
     build:
       context: .
