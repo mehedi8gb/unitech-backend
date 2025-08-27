@@ -9,8 +9,8 @@ services:
       - MYSQL_PASSWORD=app
       - MYSQL_DATABASE=unitech_db
     restart: unless-stopped
-    # networks:
-    #   - laravel-production
+    networks:
+      - laravel-production
     healthcheck:
       test:
         ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-papp"]
