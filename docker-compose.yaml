@@ -7,8 +7,8 @@ services:
       # -----------------------------------------------------------
       - laravel-storage-production:/var/www/storage
       - laravel-public-assets:/var/www/public/build
-    networks:
-      - laravel-production
+    # networks:
+    #   - laravel-production
     ports:
       # -----------------------------------------------------------
       - "${NGINX_PORT:-8090}:80"
@@ -26,14 +26,13 @@ services:
       - laravel-storage-production:/var/www/storage
     env_file:
       - .env
-    networks:
-      - laravel-production
+    # networks:
+    #   - laravel-production
     restart: unless-stopped
 
 volumes:
   mongodb-data:
   laravel-storage-production:
   laravel-public-assets:
-
-networks:
-  laravel-production:
+# networks:
+#   laravel-production:
