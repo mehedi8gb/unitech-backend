@@ -23,10 +23,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zip \
     bcmath \
     soap \
-    && pecl install redis \
-    && pecl install mongodb  \
+    && pecl install redis \ 
     && docker-php-ext-enable redis \
-    && apt-get autoremove -y && docker-php-ext-enable mongodb  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && apt-get autoremove -y    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
 
